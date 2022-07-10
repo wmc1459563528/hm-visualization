@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add('ready')
   }, 200)
 })
-// 轻提示
+// todo 轻提示
 const myBox = document.querySelector('#myToast')
 const toast = new bootstrap.Toast(myBox, {
   animation: true, // 开启过渡动画
@@ -18,5 +18,22 @@ const showTip = res => {
   myBox.querySelector('.toast-body').innerHTML = res
   toast.show()
 }
-//  axios请求根路径
+// todo  axios请求根路径
 axios.defaults.baseURL = 'http://ajax-api.itheima.net'
+// todo 显示用户名
+const userName = document.querySelector('#navbar-main .font-weight-bold')
+if (userName) {
+  userName.innerHTML = localStorage.getItem('user-name')
+}
+// todo 退出
+// ! 思路： 登陆时候做什么 退出就清除什么
+const logout = document.querySelector('#logout')
+if (logout) {
+  logout.addEventListener('click', function () {
+    // 清除本地存储
+    localStorage.removeItem('user-name')
+    localStorage.removeItem('user-token')
+    // 跳转到登录页面
+    location.href = './login.html'
+  })
+}

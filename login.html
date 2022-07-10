@@ -108,9 +108,11 @@
       if (data.password.length < 6) return showTip('密码不能小于6位字符')
       try {
         const { data: res } = await axios.post('/login', data)
-        // console.log(res)
+        console.log(res)
+        localStorage.setItem('user-token', res.data.token)
+        localStorage.setItem('user-name', res.data.username)
         showTip('登录成功')
-        setTimeout(() => location.href = 'http://wmc 0216.com')
+        setTimeout(() => location.href = './index.html', 2000)
       } catch (err) {
         console.dir(err)
         if (err.response.status === 400) {
