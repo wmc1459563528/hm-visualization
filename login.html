@@ -100,11 +100,17 @@
     btn.addEventListener('click', async function () {
       let data = serialize(form, { hash: true })
       // console.log(data)
+      // 校验用户名
+      if (!data.username || data.username.trim() === '') return showTip('用户名不能为空')
+      // 校验密码
+      if (!data.password || data.password.trim() === '') return showTip('密码不能为空')
+      // 校验密码长度
+      if (data.password.length < 6) return showTip('密码不能小于6位字符')
       try {
         const { data: res } = await axios.post('/login', data)
         // console.log(res)
         showTip('登录成功')
-        setTimeout(() => location.href = 'http://wmc0216.com')
+        setTimeout(() => location.href = 'http://wmc 0216.com')
       } catch (err) {
         console.dir(err)
         if (err.response.status === 400) {
