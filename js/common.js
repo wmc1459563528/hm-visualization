@@ -12,11 +12,14 @@ const toast = new bootstrap.Toast(myBox, {
   autohide: true, // 开启自动隐藏
   delay: 3000, // 3s后自动关闭
 })
-// 将提示信息封装函数进行传参
+// todo 将提示信息封装函数进行传参
 const showTip = res => {
   // 获取到提示信息并修改
   myBox.querySelector('.toast-body').innerHTML = res
   toast.show()
 }
-//  axios请求根路径
+// todo axios请求根路径
 axios.defaults.baseURL = 'http://ajax-api.itheima.net'
+// todo 显示用户名
+const username = document.querySelector('#navbar-main .text-sm')
+username.innerHTML = localStorage.getItem('user-name')

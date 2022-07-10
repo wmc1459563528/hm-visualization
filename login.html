@@ -108,6 +108,10 @@
       if (data.password.length < 6) return showTip('密码不能小于6位字符')
       try {
         const { data: res } = await axios.post('/login', data)
+        console.log(res)
+        localStorage.setItem('user-token', res.data.token)
+        localStorage.setItem('user-name', res.data.username)
+
         // console.log(res)
         showTip('登录成功')
         setTimeout(() => location.href = './index.html', 2000)
