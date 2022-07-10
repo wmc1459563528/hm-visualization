@@ -118,9 +118,7 @@
       } catch (err) {
         // 以对象的形式打印err内的内容 
         console.dir(err)
-        if (err.request.status === 409) {
-          showTip('您输入的用户名重复了~请重新输入')
-        }
+        if (err.request.status === 409) showTip('您输入的用户名重复了~请重新输入')
         showTip('服务器异常，请稍后再试')
 
       }
