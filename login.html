@@ -107,11 +107,11 @@
       // 校验密码长度
       if (data.password.length < 6) return showTip('密码不能小于6位字符')
       try {
-        const { data: res } = await axios.post('/login', data)
-        console.log(res)
-        localStorage.setItem('user-token', res.data.token)
-        localStorage.setItem('user-name', res.data.username)
-        showTip('登录成功')
+        const { data: res, message } = await axios.post('/login', data)
+        // console.log(res)
+        localStorage.setItem('user-token', res.token)
+        localStorage.setItem('user-name', res.username)
+        showTip(message)
         setTimeout(() => location.href = './index.html', 2000)
       } catch (err) {
         console.dir(err)

@@ -30,11 +30,12 @@ if (userName) {
 const logout = document.querySelector('#logout')
 if (logout) {
   logout.addEventListener('click', function () {
+    showTip('退出成功，正在跳转登录页面')
     // 清除本地存储
     localStorage.removeItem('user-name')
     localStorage.removeItem('user-token')
     // 跳转到登录页面
-    location.href = './login.html'
+    setTimeout(() => location.href = './login.html', 2000)
   })
 }
 // todo 拦截器配置 携带token才可以访问数据
@@ -54,9 +55,26 @@ axios.interceptors.request.use(function (config) {
 axios.interceptors.response.use(function (response) {
   // 2xx 范围内的状态码都会触发该函数。
   // 对响应数据做点什么
-  return response;
+  console.dir(response)
+  if (response.status !== 200) {
+    localStorage.removeItem('user-name')
+    localStorage.removeItem('user-token')
+    // 重新登录
+    location.href = './login.html'
+  }
+  // todo 少一层data
+  return response.data;
 }, function (error) {
   // 超出 2xx 范围的状态码都会触发该函数。
   // 对响应错误做点什么
+  console.dir(error)
+  // console.dir(response)
+  if (error.response.status !== 200 || error.response.status == 401) {
+    showTip('token认证超时，请重新登录')
+    localStorage.removeItem('user-name')
+    localStorage.removeItem('user-token')
+    // 重新登录
+    setTimeout(() => location.href = './login.html', 2000)
+  }
   return Promise.reject(error);
 });
