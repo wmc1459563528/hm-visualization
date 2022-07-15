@@ -55,13 +55,13 @@ axios.interceptors.request.use(function (config) {
 axios.interceptors.response.use(function (response) {
   // 2xx 范围内的状态码都会触发该函数。
   // 对响应数据做点什么
-  console.dir(response)
-  if (response.status !== 200) {
+  // console.dir(response)
+  /* if (response.status !== 200) {
     localStorage.removeItem('user-name')
     localStorage.removeItem('user-token')
     // 重新登录
     location.href = './login.html'
-  }
+  } */
   // todo 少一层data
   return response.data;
 }, function (error) {
@@ -69,7 +69,7 @@ axios.interceptors.response.use(function (response) {
   // 对响应错误做点什么
   console.dir(error)
   // console.dir(response)
-  if (error.response.status !== 200 || error.response.status == 401) {
+  if (error.response.status == 401) {
     showTip('token认证超时，请重新登录')
     localStorage.removeItem('user-name')
     localStorage.removeItem('user-token')

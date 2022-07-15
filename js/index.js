@@ -274,13 +274,14 @@
         item.addEventListener('click', function () {
             // 排他
             // 1、移除掉所有的类
+
             document.querySelector('#btns button.btn-blue').classList.remove('btn-blue')
             // 2、添加当前类
             this.classList.add('btn-blue')
             initGroup(res.groupData, this.innerHTML)
-
         })
     })
+
     // todo 籍贯分布
     function initMap(province) {
         // 基于准备好的dom，初始化echarts实例
