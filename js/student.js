@@ -167,7 +167,7 @@ submit.addEventListener('click', async function () {
             showTip('添加失败')
         }
     } else {
-        console.log(modalBox.dataset.type)
+        // console.log(modalBox.dataset.type)
         const { data: res } = await axios.put(`/students/${modalBox.dataset.type}`, data)
         console.log(res)
         modal.hide()
